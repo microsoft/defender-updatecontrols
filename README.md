@@ -1,4 +1,4 @@
-NOTE: Microsoft Defender platform version 4.18.2106.5 or later is required to use these controls.
+NOTE: Microsoft Defender platform version 4.18.2106.6 or later is required to use these controls.
 
 In this github repo you will find updated Windows Defender administrative templates for use with Defender update controls documented at https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/manage-gradual-rollout?view=o365-worldwide. Configuration guidance can be found at https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/configure-updates?view=o365-worldwide.
 
