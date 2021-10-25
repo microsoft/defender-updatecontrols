@@ -37,6 +37,15 @@
 
     Enabled: 
     Allow managed devices to update through metered connections. Data charges may apply.</string>
+    <string id="HideExclusionsFromLocalAdmins">Control whether or not exclusions are visible to Local Admins.</string>
+    <string id="HideExclusionsFromLocalAdmins_Explain">
+    This policy setting controls whether or not exclusions are visible to Local Admins.  For end users (that are not Local Admins) exclusions are not visible, whether or not this setting is enabled.
+    Disabled(Default):
+        If you disable or do not configure this setting, Local Admins will be able to see exclusions in the Windows Security App or via PowerShell.
+
+    Enabled: 
+        If you enable this setting, Local Admins will no longer be able to see the exclusion list in Windows Security App or via PowerShell.
+        Note: Applying this setting will not remove exclusions, it will only prevent them from being visible to Local Admins. This is reflected in Get-MpPreference.</string>
     <string id="AllowNetworkProtectionOnWinServer">This settings controls whether Network Protection is allowed to be configured into block or audit mode on Windows Server.</string>
     <string id="AllowNetworkProtectionOnWinServer_Explain">
     Disabled (Default): 
@@ -235,13 +244,13 @@
 
     If you disable this setting, raw write notifications be disabled.</string>
     <string id="DisableRealtimeMonitoring">Turn off real-time protection</string>
-    <string id="DisableRealtimeMonitoringDefender_Explain">This policy setting turns off real-time protection prompts for known malware detection.
+    <string id="DisableRealtimeMonitoringDefender_Explain">This policy turns off real-time protection in Microsoft Defender Antivirus.
 
-    Microsoft Defender Antivirus alerts you when malware or potentially unwanted software attempts to install itself or to run on your computer.
+    Real-time protection consists of always-on scanning with file and process behavior monitoring and heuristics. When real-time protection is on, Microsoft Defender Antivirus detects malware and potentially unwanted software that attempts to install itself or run on your device, and prompts you to take action on malware detections.
 
-    If you enable this policy setting, Microsoft Defender Antivirus will not prompt users to take actions on malware detections.
+    If you enable this policy setting, real-time protection is turned off. 
 
-    If you disable or do not configure this policy setting, Microsoft Defender Antivirus will prompt users to take actions on malware detections.</string>
+    If you either disable or do not configure this policy setting, real-time protection is turned on.</string>
     <string id="DisableRealtimeMonitoring_Explain">
     This policy setting turns off real-time protection prompts for known malware detection.
 
@@ -408,7 +417,7 @@
     <string id="CheckForSignaturesBeforeRunningScan">Check for the latest virus and spyware security intelligence before running a scheduled scan</string>
     <string id="CheckForSignaturesBeforeRunningScan_Explain">This policy setting allows you to manage whether a check for new virus and spyware security intelligence will occur before running a scan. 
 
-    This setting applies to scheduled scans as well as the command line "mpcmdrun -SigUpdate", but it has no effect on scans initiated manually from the user interface.
+    This setting applies to scheduled scans, but it has no effect on scans initiated manually from the user interface or to the ones started from the command line using "mpcmdrun -Scan".
 
     If you enable this setting, a check for new security intelligence will occur before running a scan.
 
@@ -418,13 +427,21 @@
 
     If you enable or do not configure this setting, archive files will be scanned.
 
-    If you disable this setting, archive files will not be scanned.</string>
+    If you disable this setting, archive files will not be scanned. However, archives are always scanned during directed scans.</string>
     <string id="Scan_DisableCatchupFullScan">Turn on catch-up full scan</string>
     <string id="Scan_DisableCatchupFullScan_Explain">This policy setting allows you to configure catch-up scans for scheduled full scans. A catch-up scan is a scan that is initiated because a regularly scheduled scan was missed.  Usually these scheduled scans are missed because the computer was turned off at the scheduled time. 
 
     If you enable this setting, catch-up scans for scheduled full scans will be turned on.  If a computer is offline for two consecutive scheduled scans, a catch-up scan is started the next time someone logs on to the computer.  If there is no scheduled scan configured, there will be no catch-up scan run. 
 
     If you disable or do not configure this setting, catch-up scans for scheduled full scans will be turned off.</string>
+    <string id="Scan_ThrottleForScheduledScanOnly">CPU throttling type</string>
+    <string id="Scan_ThrottleForScheduledScanOnly_Explain">This policy setting determines whether the maximum percentage CPU utilization permitted during a scan applies only to scheduled scans, or to both scheduled and custom scans (but not real-time protection). The maximum CPU utilization limit is also referred to as CPU throttling, or a CPU usage limit.
+
+    The default value for this policy setting is True, which means CPU throttling is applied only to scheduled scans.
+
+    If you either enable or do not configure this setting, CPU throttling will apply only to scheduled scans.
+
+    If you disable this setting, CPU throttling will apply to scheduled and custom scans.</string>
     <string id="Scan_DisableCatchupQuickScan">Turn on catch-up quick scan</string>
     <string id="Scan_DisableCatchupQuickScan_Explain">This policy setting allows you to configure catch-up scans for scheduled quick scans. A catch-up scan is a scan that is initiated because a regularly scheduled scan was missed.  Usually these scheduled scans are missed because the computer was turned off at the scheduled time. 
 
@@ -432,8 +449,8 @@
 
     If you disable or do not configure this setting, catch-up scans for scheduled quick scans will be turned off.</string>
     <string id="Scan_DisableEmailScanning">Turn on e-mail scanning</string>
-    <string id="Scan_DisableEmailScanning_Explain">This policy setting allows you to configure e-mail scanning. When e-mail scanning is enabled, the engine will parse the mailbox and mail files, according to their specific format, in order to analyze the mail bodies and attachments. Several e-mail formats are currently supported, for example: pst (Outlook), dbx, mbx, mime (Outlook Express), binhex (Mac).
-
+    <string id="Scan_DisableEmailScanning_Explain">This policy setting allows you to configure e-mail scanning. When e-mail scanning is enabled, the engine will parse the mailbox and mail files, according to their specific format, in order to analyze the mail bodies and attachments. Several e-mail formats are currently supported, for example: pst (Outlook), dbx, mbx, mime (Outlook Express), binhex (Mac). Email scanning is not supported on modern email clients.
+    
     If you enable this setting, e-mail scanning will be enabled.
 
     If you disable or do not configure this setting, e-mail scanning will be disabled.</string>
@@ -1032,36 +1049,48 @@
         Please follow the device control policy rules xml schema to fill out the policy rules data.
         Alternatively you could use a file path containing the XML rules data.
     </string>
-    <string id="Root_PlatformUpdateChannel">Select the channel for Microsoft Defender monthly platform updates.</string>
+    <string id="Root_PlatformUpdateChannel">Select the channel for Microsoft Defender monthly platform updates</string>
     <string id="Root_PlatformUpdateChannel_Explain">Enable this policy to specify when devices receive Microsoft Defender platform updates during the monthly gradual rollout.​
 
-        Beta Channel: Devices set to this channel will be the first to receive new monthly updates. Select Beta Channel to participate in identifying and reporting issues to Microsoft. Devices in the Windows Insider Program are subscribed to this channel by default. For use in test environments only.
-        Current Channel (Preview): Devices set to this channel will be offered updates earliest during the monthly gradual release cycle. Suggested for validation environments.
+        Beta Channel: Devices set to this channel will be the first to receive new updates. Select Beta Channel to participate in identifying and reporting issues to Microsoft. Devices in the Windows Insider Program are subscribed to this channel by default. For use in (manual) test environments only and a limited number of devices.
+        Current Channel (Preview): Devices set to this channel will be offered updates earliest during the monthly gradual release cycle. Suggested for pre-production/validation environments.
         Current Channel (Staged): Devices will be offered updates after the monthly gradual release cycle. Suggested to apply to a small, representative part of your production population (~10%).
         Current Channel (Broad): Devices will be offered updates only after the gradual release cycle completes. Suggested to apply to a broad set of devices in your production population (~10-100%).
+        Critical - Time delay: Devices will be offered updates with a 48-hour delay. Suggested for critical environments only.
 
-        If you disable or do not configure this policy, the device will remain in Current Channel (Default). Stay up to date automatically during the gradual release cycle. Suitable for most devices.
+        If you disable or do not configure this policy, the device will stay up to date automatically during the gradual release cycle. Suitable for most devices.
     </string>
-    <string id="Root_EngineUpdateChannel">Select the channel for Microsoft Defender monthly engine updates.</string>
+    <string id="Root_EngineUpdateChannel">Select the channel for Microsoft Defender monthly engine updates</string>
     <string id="Root_EngineUpdateChannel_Explain">Enable this policy to specify when devices receive Microsoft Defender engine updates during the monthly gradual rollout.​
 
-        Beta Channel: Devices set to this channel will be the first to receive new monthly updates. Select Beta Channel to participate in identifying and reporting issues to Microsoft. Devices in the Windows Insider Program are subscribed to this channel by default. For use in test environments only.
-        Current Channel (Preview): Devices set to this channel will be offered updates earliest during the monthly gradual release cycle. Suggested for validation environments.
+        Beta Channel: Devices set to this channel will be the first to receive new updates. Select Beta Channel to participate in identifying and reporting issues to Microsoft. Devices in the Windows Insider Program are subscribed to this channel by default. For use in (manual) test environments only and a limited number of devices.
+        Current Channel (Preview): Devices set to this channel will be offered updates earliest during the monthly gradual release cycle. Suggested for pre-production/validation environments.
         Current Channel (Staged): Devices will be offered updates after the monthly gradual release cycle. Suggested to apply to a small, representative part of your production population (~10%).
         Current Channel (Broad): Devices will be offered updates only after the gradual release cycle completes. Suggested to apply to a broad set of devices in your production population (~10-100%).
+        Critical - Time delay: Devices will be offered updates with a 48-hour delay. Suggested for critical environments only.
 
-        If you disable or do not configure this policy, the device will remain in Current Channel (Default). Stay up to date automatically during the gradual release cycle. Suitable for most devices.
+        If you disable or do not configure this policy, the device will stay up to date automatically during the gradual release cycle. Suitable for most devices.
+    </string>
+    <string id="Root_SecurityIntelligenceUpdateChannel">Select the channel for Microsoft Defender daily security intelligence updates</string>
+    <string id="Root_SecurityIntelligenceUpdateChannel_Explain">Enable this policy to specify when devices receive Microsoft Defender security intelligence updates during the daily gradual rollout.
+
+        Current Channel (Staged): Devices will be offered updates after the release cycle. Suggested to apply to a small, representative part of production population (~10%).
+        Current Channel (Broad): Devices will be offered updates only after the gradual release cycle completes. Suggested to apply to a broad set of devices in your production population (~10-100%).
+        Critical - Time delay: Devices will be offered updates with a 48-hour delay. Suggested for critical environments only.
+
+        If you disable or do not configure this policy, the device will stay up to date automatically during the daily release cycle. Suitable for most devices.
     </string>
     <string id="Root_UpdateChannel_Dropdown_Beta">Beta Channel</string>
     <string id="Root_UpdateChannel_Dropdown_Preview">Current Channel (Preview)</string>
     <string id="Root_UpdateChannel_Dropdown_Staged">Current Channel (Staged)</string>
     <string id="Root_UpdateChannel_Dropdown_Broad">Current Channel (Broad)</string>
+    <string id="Root_UpdateChannel_Dropdown_Delayed">Critical - Time delay</string>
     <string id="MpEngine_DisableGradualRelease">Disable gradual rollout of Microsoft Defender updates.</string>
     <string id="MpEngine_DisableGradualRelease_Explain">Enable this policy to disable gradual rollout of Defender updates.
 
         Current Channel (Broad): Devices set to this channel will be offered updates last during the gradual release cycle. Best for datacenter machines that only receive limited updates.
 
-        Note: this setting applies to both monthly as well as daily Defender updates and will override any previously configured channel selections for platform and engine updates.
+        Note: This setting applies to both monthly as well as daily Defender updates and will override any previously configured channel selections for platform and engine updates.
 
         If you disable or do not configure this policy, the device will remain in Current Channel (Default) unless specified otherwise in specific channels for platform and engine updates. Stay up to date automatically during the gradual release cycle. Suitable for most devices.</string>
     </stringTable>
@@ -1257,8 +1286,14 @@
     <presentation id="SchedulerRandomizationTime">
         <decimalTextBox refId="SchedulerRandomizationTime" defaultValue="4">Specify scheduler randomization window in hours.</decimalTextBox>
     </presentation>
-    <presentation id="UpdateChannelsDropDown">
-    <dropdownList refId="UpdateChannelsDropDown" noSort="true" defaultItem="0">Select the channel for Microsoft Defender monthly platform updates</dropdownList>
+    <presentation id="PlatformUpdateChannelsDropDown">
+    <dropdownList refId="UpdateChannelsDropDown" noSort="true" defaultItem="0">Select the channel for Microsoft Defender monthly platform updates:</dropdownList>
+    </presentation>
+    <presentation id="EngineUpdateChannelsDropDown">
+    <dropdownList refId="UpdateChannelsDropDown" noSort="true" defaultItem="0">Select the channel for Microsoft Defender monthly engine updates:</dropdownList>
+    </presentation>
+    <presentation id="SecurityIntelligenceUpdateChannelsDropDown">
+    <dropdownList refId="UpdateChannelsDropDown" noSort="true" defaultItem="0">Select the channel for Microsoft Defender daily security intelligence updates:</dropdownList>
     </presentation>
    </presentationTable>
 </resources>
