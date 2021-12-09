@@ -1049,48 +1049,36 @@
         Please follow the device control policy rules xml schema to fill out the policy rules data.
         Alternatively you could use a file path containing the XML rules data.
     </string>
-    <string id="Root_PlatformUpdateChannel">Select the channel for Microsoft Defender monthly platform updates</string>
+    <string id="Root_PlatformUpdateChannel">Select the channel for Microsoft Defender monthly platform updates.</string>
     <string id="Root_PlatformUpdateChannel_Explain">Enable this policy to specify when devices receive Microsoft Defender platform updates during the monthly gradual rollout.​
 
-        Beta Channel: Devices set to this channel will be the first to receive new updates. Select Beta Channel to participate in identifying and reporting issues to Microsoft. Devices in the Windows Insider Program are subscribed to this channel by default. For use in (manual) test environments only and a limited number of devices.
-        Current Channel (Preview): Devices set to this channel will be offered updates earliest during the monthly gradual release cycle. Suggested for pre-production/validation environments.
+        Beta Channel: Devices set to this channel will be the first to receive new monthly updates. Select Beta Channel to participate in identifying and reporting issues to Microsoft. Devices in the Windows Insider Program are subscribed to this channel by default. For use in test environments only.
+        Current Channel (Preview): Devices set to this channel will be offered updates earliest during the monthly gradual release cycle. Suggested for validation environments.
         Current Channel (Staged): Devices will be offered updates after the monthly gradual release cycle. Suggested to apply to a small, representative part of your production population (~10%).
         Current Channel (Broad): Devices will be offered updates only after the gradual release cycle completes. Suggested to apply to a broad set of devices in your production population (~10-100%).
-        Critical - Time delay: Devices will be offered updates with a 48-hour delay. Suggested for critical environments only.
 
-        If you disable or do not configure this policy, the device will stay up to date automatically during the gradual release cycle. Suitable for most devices.
+        If you disable or do not configure this policy, the device will remain in Current Channel (Default). Stay up to date automatically during the gradual release cycle. Suitable for most devices.
     </string>
-    <string id="Root_EngineUpdateChannel">Select the channel for Microsoft Defender monthly engine updates</string>
+    <string id="Root_EngineUpdateChannel">Select the channel for Microsoft Defender monthly engine updates.</string>
     <string id="Root_EngineUpdateChannel_Explain">Enable this policy to specify when devices receive Microsoft Defender engine updates during the monthly gradual rollout.​
 
-        Beta Channel: Devices set to this channel will be the first to receive new updates. Select Beta Channel to participate in identifying and reporting issues to Microsoft. Devices in the Windows Insider Program are subscribed to this channel by default. For use in (manual) test environments only and a limited number of devices.
-        Current Channel (Preview): Devices set to this channel will be offered updates earliest during the monthly gradual release cycle. Suggested for pre-production/validation environments.
+        Beta Channel: Devices set to this channel will be the first to receive new monthly updates. Select Beta Channel to participate in identifying and reporting issues to Microsoft. Devices in the Windows Insider Program are subscribed to this channel by default. For use in test environments only.
+        Current Channel (Preview): Devices set to this channel will be offered updates earliest during the monthly gradual release cycle. Suggested for validation environments.
         Current Channel (Staged): Devices will be offered updates after the monthly gradual release cycle. Suggested to apply to a small, representative part of your production population (~10%).
         Current Channel (Broad): Devices will be offered updates only after the gradual release cycle completes. Suggested to apply to a broad set of devices in your production population (~10-100%).
-        Critical - Time delay: Devices will be offered updates with a 48-hour delay. Suggested for critical environments only.
 
-        If you disable or do not configure this policy, the device will stay up to date automatically during the gradual release cycle. Suitable for most devices.
-    </string>
-    <string id="Root_SecurityIntelligenceUpdateChannel">Select the channel for Microsoft Defender daily security intelligence updates</string>
-    <string id="Root_SecurityIntelligenceUpdateChannel_Explain">Enable this policy to specify when devices receive Microsoft Defender security intelligence updates during the daily gradual rollout.
-
-        Current Channel (Staged): Devices will be offered updates after the release cycle. Suggested to apply to a small, representative part of production population (~10%).
-        Current Channel (Broad): Devices will be offered updates only after the gradual release cycle completes. Suggested to apply to a broad set of devices in your production population (~10-100%).
-        Critical - Time delay: Devices will be offered updates with a 48-hour delay. Suggested for critical environments only.
-
-        If you disable or do not configure this policy, the device will stay up to date automatically during the daily release cycle. Suitable for most devices.
+        If you disable or do not configure this policy, the device will remain in Current Channel (Default). Stay up to date automatically during the gradual release cycle. Suitable for most devices.
     </string>
     <string id="Root_UpdateChannel_Dropdown_Beta">Beta Channel</string>
     <string id="Root_UpdateChannel_Dropdown_Preview">Current Channel (Preview)</string>
     <string id="Root_UpdateChannel_Dropdown_Staged">Current Channel (Staged)</string>
     <string id="Root_UpdateChannel_Dropdown_Broad">Current Channel (Broad)</string>
-    <string id="Root_UpdateChannel_Dropdown_Delayed">Critical - Time delay</string>
     <string id="MpEngine_DisableGradualRelease">Disable gradual rollout of Microsoft Defender updates.</string>
     <string id="MpEngine_DisableGradualRelease_Explain">Enable this policy to disable gradual rollout of Defender updates.
 
         Current Channel (Broad): Devices set to this channel will be offered updates last during the gradual release cycle. Best for datacenter machines that only receive limited updates.
 
-        Note: This setting applies to both monthly as well as daily Defender updates and will override any previously configured channel selections for platform and engine updates.
+        Note: this setting applies to both monthly as well as daily Defender updates and will override any previously configured channel selections for platform and engine updates.
 
         If you disable or do not configure this policy, the device will remain in Current Channel (Default) unless specified otherwise in specific channels for platform and engine updates. Stay up to date automatically during the gradual release cycle. Suitable for most devices.</string>
     </stringTable>
@@ -1286,14 +1274,8 @@
     <presentation id="SchedulerRandomizationTime">
         <decimalTextBox refId="SchedulerRandomizationTime" defaultValue="4">Specify scheduler randomization window in hours.</decimalTextBox>
     </presentation>
-    <presentation id="PlatformUpdateChannelsDropDown">
-    <dropdownList refId="UpdateChannelsDropDown" noSort="true" defaultItem="0">Select the channel for Microsoft Defender monthly platform updates:</dropdownList>
-    </presentation>
-    <presentation id="EngineUpdateChannelsDropDown">
-    <dropdownList refId="UpdateChannelsDropDown" noSort="true" defaultItem="0">Select the channel for Microsoft Defender monthly engine updates:</dropdownList>
-    </presentation>
-    <presentation id="SecurityIntelligenceUpdateChannelsDropDown">
-    <dropdownList refId="UpdateChannelsDropDown" noSort="true" defaultItem="0">Select the channel for Microsoft Defender daily security intelligence updates:</dropdownList>
+    <presentation id="UpdateChannelsDropDown">
+    <dropdownList refId="UpdateChannelsDropDown" noSort="true" defaultItem="0">Select the channel for Microsoft Defender monthly platform updates</dropdownList>
     </presentation>
    </presentationTable>
 </resources>

@@ -218,7 +218,7 @@
                 </enum>
             </elements>
         </policy>
-        <policy name="Root_PlatformUpdateChannel" class="Machine" displayName="$(string.Root_PlatformUpdateChannel)" explainText="$(string.Root_PlatformUpdateChannel_Explain)" key="Software\Policies\Microsoft\Windows Defender" presentation="$(presentation.PlatformUpdateChannelsDropDown)">
+        <policy name="Root_PlatformUpdateChannel" class="Machine" displayName="$(string.Root_PlatformUpdateChannel)" explainText="$(string.Root_PlatformUpdateChannel_Explain)" key="Software\Policies\Microsoft\Windows Defender" presentation="$(presentation.UpdateChannelsDropDown)">
             <parentCategory ref="AntiSpywareDefender" />
             <supportedOn ref="windows:SUPPORTED_Windows_10_0_RS1" />
             <elements>
@@ -243,15 +243,10 @@
                             <decimal value="5" />
                         </value>
                     </item>
-                    <item displayName="$(string.Root_UpdateChannel_Dropdown_Delayed)">
-                        <value>
-                            <decimal value="6" />
-                        </value>
-                    </item>
                 </enum>
             </elements>
         </policy>
-        <policy name="Root_EngineUpdateChannel" class="Machine" displayName="$(string.Root_EngineUpdateChannel)" explainText="$(string.Root_EngineUpdateChannel_Explain)" key="Software\Policies\Microsoft\Windows Defender" presentation="$(presentation.EngineUpdateChannelsDropDown)">
+        <policy name="Root_EngineUpdateChannel" class="Machine" displayName="$(string.Root_EngineUpdateChannel)" explainText="$(string.Root_EngineUpdateChannel_Explain)" key="Software\Policies\Microsoft\Windows Defender" presentation="$(presentation.UpdateChannelsDropDown)">
             <parentCategory ref="AntiSpywareDefender" />
             <supportedOn ref="windows:SUPPORTED_Windows_10_0_RS1" />
             <elements>
@@ -274,34 +269,6 @@
                     <item displayName="$(string.Root_UpdateChannel_Dropdown_Broad)">
                         <value>
                             <decimal value="5" />
-                        </value>
-                    </item>
-                    <item displayName="$(string.Root_UpdateChannel_Dropdown_Delayed)">
-                        <value>
-                            <decimal value="6" />
-                        </value>
-                    </item>
-                </enum>
-            </elements>
-        </policy>
-        <policy name="Root_SecurityIntelligenceUpdateChannel" class="Machine" displayName="$(string.Root_SecurityIntelligenceUpdateChannel)" explainText="$(string.Root_SecurityIntelligenceUpdateChannel_Explain)" key="Software\Policies\Microsoft\Windows Defender" presentation="$(presentation.SecurityIntelligenceUpdateChannelsDropDown)">
-            <parentCategory ref="AntiSpywareDefender" />
-            <supportedOn ref="windows:SUPPORTED_Windows_10_0_RS1" />
-            <elements>
-                <enum id="UpdateChannelsDropDown" valueName="SignaturesRing" required="true">
-                    <item displayName="$(string.Root_UpdateChannel_Dropdown_Staged)">
-                        <value>
-                            <decimal value="4" />
-                        </value>
-                    </item>
-                    <item displayName="$(string.Root_UpdateChannel_Dropdown_Broad)">
-                        <value>
-                            <decimal value="5" />
-                        </value>
-                    </item>
-                    <item displayName="$(string.Root_UpdateChannel_Dropdown_Delayed)">
-                        <value>
-                            <decimal value="6" />
                         </value>
                     </item>
                 </enum>
