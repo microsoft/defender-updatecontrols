@@ -142,15 +142,19 @@
       If you disable or do not configure this setting, the proxy will skip over this fallback step according to the order specified above.
     </string>
     <string id="RandomizeScheduleTaskTimes">Randomize scheduled task times</string>
-    <string id="RandomizeScheduleTaskTimes_Explain">This policy setting allows you to configure the scheduled scan, and the scheduled security intelligence update, start time window in hours.
+    <string id="RandomizeScheduleTaskTimes_Explain">This policy setting allows you to configure the randomization of the scheduled scan start time and the scheduled definition update start time.
 
-    If you disable or do not configure this setting, scheduled tasks will begin at a random time within 4 hours after the time specified in Task Scheduler.
-    If you enable this setting, you can widen, or narrow, this randomization period. Specify a randomization window of between 1 and 23 hours.</string>
+        If you enable or do not configure this policy setting, and did not set a randomization window in the Configure scheduled task time randomization window setting , then randomization will be added between 0-4 hours.
+        If you enable or do not configure this policy setting, and set a randomization window in the Configure scheduled task time randomization window setting, the configured randomization window will be used.
+        If you disable this policy setting, but configured the scheduled task time randomization window, randomization will not be done. 
+    </string>
     <string id="SchedulerRandomizationTime">Configure scheduled task times randomization window</string>
-    <string id="SchedulerRandomizationTime_Explain">This policy setting allows you to configure scheduled scan start time and the scheduled security intelligence update start time window in hours.
+    <string id="SchedulerRandomizationTime_Explain">This policy setting allows you to configure scheduled task scan start time and the scheduled security intelligence update start time window in hours. This setting affects the Randomize scheduled task times configuration.
 
-    If you disable or do not configure this setting, scheduled tasks will begin at a random time within an interval of 4 hours after the specified start time.
-    If you enable this setting, you must pick a randomization window in hours. The possible randomization window interval is between 1 and 23 hours.</string>
+        If you enable this setting, you must pick a randomization window in hours. The possible randomization window interval is between 1 and 23 hours. The randomization interval implemented is between 0 and the configured value. 
+        When you enable this setting, Randomize scheduled task times settings uses the randomization window specified in this configuration setting. 
+        If you disable or do not configure this policy setting, Randomize scheduled task times settings will randomize scheduled task times between 0-4 hours.</string>
+
     <string id="ServiceKeepAlive">Allow antimalware service to remain running always</string>
     <string id="ServiceKeepAlive_Explain">This policy setting allows you to configure whether or not the antimalware service remains running when antivirus and antispyware security intelligence is disabled. It is recommended that this setting remain disabled.
 
@@ -219,6 +223,13 @@
     If you enable or do not configure this setting, script scanning will be enabled.
 
     If you disable this setting, script scanning will be disabled.</string>
+
+    <string id="RealtimeProtection_OobeEnableRtpAndSigUpdate">Configure real-time protection and Security Intelligence Updates during OOBE</string>
+    <string id="RealtimeProtection_OobeEnableRtpAndSigUpdate_Explain">This policy setting allows you to configure whether real-time protection and Security Intelligence Updates are enabled during OOBE (Out of Box experience).
+ 
+    If you enable this setting, real-time protection and Security Intelligence Updates are enabled during OOBE.
+ 
+    If you either disable or do not configure this policy setting, real-time protection and Security Intelligence Updates during OOBE is not enabled.</string>
 
     <string id="RealtimeProtection_DisableBehaviorMonitoring">Turn on behavior monitoring</string>
     <string id="RealtimeProtection_DisableBehaviorMonitoring_Explain">This policy setting allows you to configure behavior monitoring.
@@ -474,6 +485,12 @@
     If you enable or do not configure this setting, heuristics will be enabled.
 
     If you disable this setting, heuristics will be disabled.</string>
+    <string id="Scan_DisablePackedExeScanning">Scan packed executables</string>
+    <string id="Scan_DisablePackedExeScanning_Explain">This policy setting allows you to configure scanning for packed executables. It is recommended that this type of scanning remain enabled.
+
+    If you enable or do not configure this setting, packed executables will  be scanned.
+
+    If you disable this setting, packed executables will not be scanned.</string>
     <string id="Scan_DisableRemovableDriveScanning">Scan removable drives</string>
     <string id="Scan_DisableRemovableDriveScanning_Explain">This policy setting allows you to manage whether or not to scan for malicious software and unwanted software in the contents of removable drives, such as USB flash drives, when running a full scan.
 
@@ -498,12 +515,12 @@
     If you enable this setting, mapped network drives will be scanned.
 
     If you disable or do not configure this setting, mapped network drives will not be scanned.</string>
-    <string id="Scan_DisableScanningNetworkFiles">Scan network files</string>
-    <string id="Scan_DisableScanningNetworkFiles_Explain">This policy setting allows you to configure scanning for network files. It is recommended that you do not enable this setting.
+    <string id="Scan_DisableScanningNetworkFiles">Configure scanning of network files</string>
+    <string id="Scan_DisableScanningNetworkFiles_Explain">This policy setting allows the scanning of network files using on access protection. The default is enabled. Recommended to remain enabled in most cases.
 
-    If you enable this setting, network files will be scanned.
+    If you enable or do not configure this setting, network files will be scanned.
 
-    If you disable or do not configure this setting, network files will not be scanned.</string>
+    If you disable this setting, network files will not be scanned.</string>
     <string id="Scan_LocalSettingOverrideAvgCPULoadFactor">Configure local setting override for maximum percentage of CPU utilization</string>
     <string id="Scan_LocalSettingOverrideAvgCPULoadFactor_Explain">This policy setting configures a local override for the configuration of maximum percentage of CPU utilization during scan. This setting can only be set by Group Policy.
 
@@ -1114,6 +1131,22 @@
     <string id="DeviceControl_DataDuplicationRemoteLocation_Explain">
         Define evidence file remote location, where Device Control service will move evidence data captured.
     </string>
+	<string id="DeviceControl_DataDuplicationLocalRetentionPeriod">Set the retention period for files in the local device control cache</string>
+    <string id="DeviceControl_DataDuplicationLocalRetentionPeriod_Explain">
+        This policy setting determines how long device control retains files for evidence in its local cache on the device. Device control keeps a file in its local cache only if it is unable to upload the file to a designated network share or Azure storage. 
+
+        By default, device control retains files in its local cache for 60 days.
+    </string>
+	<string id="DeviceControl_SecuredDevicesConfiguration">Turn on device control for specific device types</string>
+    <string id="DeviceControl_SecuredDevicesConfiguration_Explain">
+        This policy setting controls which device types, identified by their PrimaryIds, will have device control protection turned on. If you enable this setting for certain device types, device control will regulate access to those devices based on the corresponding custom policy. Device control will be turned off for all other types of supported devices, even if custom protection policies are configured for those devices.
+ 
+        This setting currently supports these device types: RemovableMediaDevices, CdRomDevices, WpdDevices, and PrinterDevices. 
+ 
+        If you enable this policy setting but do not specify any PrimaryIds, device control will be turned off across all supported device types.
+ 
+        If you disable or don’t configure this policy setting, device control will be enforced on all supported devicesbased on their corresponding custom policies.
+    </string>
     <string id="Features_DeviceControlEnabled">Device Control</string>
     <string id="DeviceControl_DeviceControlEnabled_Explain">
         Enable or Disable Defender Device Control on this machine.
@@ -1123,8 +1156,17 @@
     <string id="Features_TDTFeatureEnabled_Explain">This policy setting configures the Intel TDT integration level for Intel TDT-capable devices.
 
         If you do not configure this setting, the default value will be applied. The default value is controlled by Microsoft security intelligence updates. Microsoft will enable Intel TDT if there is a known threat.
-
+        If you configure this setting to enabled, Intel TDT integration will turn on.
         If you configure this setting to disabled, Intel TDT integration will turn off.</string>
+    <string id="Features_PassiveRemediation">Enable EDR in block mode</string>
+    <string id="Features_PassiveRemediation_Explain">This policy setting enables or disables EDR in block mode (also known as "passive remediation"). EDR in block mode is recommended for devices running Microsoft Defender Antivirus in passive mode. Available with platform release: 4.18.2202.X
+
+        The data type is integer
+
+        Supported values:
+
+        1: Turn EDR in block mode on
+        0: Turn EDR in block mode off</string>
     </stringTable>
     <presentationTable>
     <presentation id="ProxyBypass">
@@ -1331,6 +1373,14 @@
     <presentation id="DeviceControl_DataDuplicationRemoteLocation">
     <textBox refId="DeviceControl_DataDuplicationRemoteLocation">
         <label>Define the Device Control data duplication remote location.</label>
+    </textBox>
+    </presentation>
+	<presentation id="DeviceControl_DataDuplicationLocalRetentionPeriod">
+		<decimalTextBox refId="DeviceControl_DataDuplicationLocalRetentionPeriod" defaultValue="60">Set the retention period for files in the local device control cache</decimalTextBox>
+    </presentation>
+	<presentation id="DeviceControl_SecuredDevicesConfiguration">
+    <textBox refId="DeviceControl_SecuredDevicesConfiguration">
+        <label>Turn on device control for specific device types</label>
     </textBox>
     </presentation>
    </presentationTable>
